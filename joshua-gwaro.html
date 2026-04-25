@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Joshua Ondari Gwaro — Law Student</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0a1628;
+      --navy-mid: #112240;
+      --navy-light: #1a3458;
+      --gold: #c9a84c;
+      --gold-light: #e2c97e;
+      --gold-pale: #f5e6c0;
+      --white: #f9f7f2;
+      --off-white: #ede9df;
+      --text-muted: #8a9bb5;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Jost', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 6vw;
+      background: rgba(10,22,40,0.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      animation: fadeDown 0.8s ease both;
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 10rem 6vw 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 70% 40%, rgba(201,168,76,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 15% 70%, rgba(26,52,88,0.8) 0%, transparent 60%);
+    }
+    .hero-line {
+      position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.3) 30%, rgba(201,168,76,0.3) 70%, transparent);
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-eyebrow {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 1.4rem;
+      display: flex; align-items: center; gap: 1rem;
+      animation: fadeUp 0.9s 0.2s ease both;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block; width: 40px; height: 1px;
+      background: var(--gold);
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 5.5vw, 5.2rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--white);
+      animation: fadeUp 0.9s 0.35s ease both;
+    }
+    h1 em {
+      font-style: italic; color: var(--gold-light);
+    }
+    .hero-title {
+      font-size: 0.82rem; font-weight: 400; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--text-muted);
+      margin-top: 1.2rem;
+      animation: fadeUp 0.9s 0.5s ease both;
+    }
+    .hero-tagline {
+      margin-top: 1.8rem; max-width: 420px;
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.2rem; font-weight: 300;
+      color: var(--off-white); line-height: 1.65;
+      animation: fadeUp 0.9s 0.65s ease both;
+    }
+    .hero-actions {
+      margin-top: 2.8rem; display: flex; gap: 1.2rem; align-items: center;
+      animation: fadeUp 0.9s 0.8s ease both;
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: 0.9rem 2.4rem;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: var(--sans);
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      text-decoration: none; border: none; cursor: pointer;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline {
+      display: inline-block;
+      padding: 0.9rem 2.4rem;
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--gold);
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      text-decoration: none; cursor: pointer;
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold-light); }
+
+    /* Profile image side */
+    .hero-visual {
+      position: relative; z-index: 1;
+      display: flex; justify-content: center; align-items: center;
+      animation: fadeIn 1.2s 0.4s ease both;
+    }
+    .portrait-frame {
+      position: relative;
+      width: 340px; height: 420px;
+    }
+    .portrait-frame::before {
+      content: '';
+      position: absolute; top: -16px; right: -16px;
+      width: 100%; height: 100%;
+      border: 1px solid rgba(201,168,76,0.35);
+      pointer-events: none;
+    }
+    .portrait-frame::after {
+      content: '';
+      position: absolute; bottom: -24px; left: -24px;
+      width: 70%; height: 50%;
+      border: 1px solid rgba(201,168,76,0.2);
+      pointer-events: none;
+    }
+    .portrait-inner {
+      width: 100%; height: 100%;
+      background: var(--navy-light);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1rem; color: var(--text-muted);
+      font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+      overflow: hidden;
+    }
+    .portrait-icon {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: rgba(201,168,76,0.12);
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(201,168,76,0.3);
+    }
+    .portrait-icon svg { width: 38px; height: 38px; opacity: 0.6; }
+    .scroll-indicator {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      color: var(--text-muted); font-size: 0.68rem; letter-spacing: 0.15em;
+      text-transform: uppercase; z-index: 1;
+      animation: fadeIn 1s 1.2s ease both;
+    }
+    .scroll-line {
+      width: 1px; height: 50px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollDrop 2s 1.5s infinite;
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 7rem 6vw; }
+    .section-label {
+      font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .section-label::after {
+      content: ''; flex: 1; max-width: 60px; height: 1px;
+      background: var(--gold); opacity: 0.5;
+    }
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      font-weight: 300; line-height: 1.15;
+      color: var(--white);
+    }
+    h2 em { font-style: italic; color: var(--gold-light); }
+
+    /* ── ABOUT ── */
+    #about { background: var(--navy-mid); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 6rem; align-items: center; margin-top: 4rem;
+    }
+    .about-stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2px; border: 1px solid rgba(201,168,76,0.15);
+    }
+    .stat-box {
+      padding: 2rem 1.5rem;
+      border: 1px solid rgba(201,168,76,0.08);
+      background: rgba(10,22,40,0.4);
+      text-align: center;
+      transition: background 0.3s;
+    }
+    .stat-box:hover { background: rgba(201,168,76,0.04); }
+    .stat-number {
+      font-family: var(--serif); font-size: 2.8rem;
+      font-weight: 300; color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.7rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+    .about-text p {
+      font-size: 1rem; color: var(--off-white);
+      margin-bottom: 1.4rem; line-height: 1.85;
+    }
+    .about-text p:first-of-type {
+      font-family: var(--serif); font-size: 1.22rem;
+      font-style: italic; color: var(--white);
+    }
+    .about-qualities {
+      display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 2rem;
+    }
+    .quality-tag {
+      padding: 0.4rem 1rem;
+      border: 1px solid rgba(201,168,76,0.25);
+      font-size: 0.73rem; font-weight: 500;
+      letter-spacing: 0.1em; color: var(--gold-pale);
+      text-transform: uppercase;
+    }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--navy); }
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px; margin-top: 4rem;
+      border: 1px solid rgba(201,168,76,0.1);
+    }
+    .skill-card {
+      padding: 2.5rem 2rem;
+      background: var(--navy-mid);
+      border: 1px solid rgba(201,168,76,0.06);
+      position: relative; overflow: hidden;
+      transition: background 0.4s;
+    }
+    .skill-card::before {
+      content: '';
+      position: absolute; bottom: 0; left: 0;
+      height: 2px; width: 0;
+      background: var(--gold);
+      transition: width 0.5s ease;
+    }
+    .skill-card:hover { background: rgba(201,168,76,0.04); }
+    .skill-card:hover::before { width: 100%; }
+    .skill-icon {
+      width: 44px; height: 44px; margin-bottom: 1.4rem;
+      background: rgba(201,168,76,0.08);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .skill-icon svg { width: 22px; height: 22px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+    .skill-name {
+      font-family: var(--serif); font-size: 1.15rem;
+      font-weight: 600; color: var(--white);
+      margin-bottom: 0.7rem;
+    }
+    .skill-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* ── EDUCATION ── */
+    #education { background: var(--navy-mid); }
+    .edu-layout { display: grid; grid-template-columns: 1fr 1.6fr; gap: 5rem; margin-top: 4rem; align-items: start; }
+    .edu-timeline { position: relative; padding-left: 2rem; }
+    .edu-timeline::before {
+      content: '';
+      position: absolute; left: 0; top: 8px; bottom: 8px;
+      width: 1px; background: rgba(201,168,76,0.2);
+    }
+    .edu-entry { position: relative; margin-bottom: 3rem; }
+    .edu-dot {
+      position: absolute; left: -2.45rem; top: 6px;
+      width: 10px; height: 10px;
+      background: var(--gold); border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(201,168,76,0.15);
+    }
+    .edu-year {
+      font-size: 0.7rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .edu-degree {
+      font-family: var(--serif); font-size: 1.35rem;
+      font-weight: 600; color: var(--white); margin-bottom: 0.3rem;
+    }
+    .edu-institution {
+      font-size: 0.82rem; color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+    .edu-desc {
+      margin-top: 0.8rem; font-size: 0.87rem;
+      color: var(--off-white); line-height: 1.75;
+    }
+    .edu-highlight {
+      background: rgba(201,168,76,0.06);
+      border-left: 2px solid var(--gold);
+      padding: 1.8rem 2rem; margin-bottom: 1.5rem;
+    }
+    .edu-highlight-label {
+      font-size: 0.68rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;
+    }
+    .edu-highlight-text {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.05rem; color: var(--white); line-height: 1.65;
+    }
+    .edu-values { list-style: none; margin-top: 1.5rem; }
+    .edu-values li {
+      display: flex; align-items: flex-start; gap: 1rem;
+      font-size: 0.85rem; color: var(--off-white);
+      margin-bottom: 0.9rem; line-height: 1.65;
+    }
+    .edu-values li::before {
+      content: '◆'; color: var(--gold); font-size: 0.5rem;
+      margin-top: 0.55rem; flex-shrink: 0;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--navy); }
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 4rem; }
+    .project-card {
+      background: var(--navy-mid);
+      border: 1px solid rgba(201,168,76,0.1);
+      padding: 2.5rem 2rem;
+      position: relative; overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(201,168,76,0.3);
+    }
+    .project-card::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px; background: var(--gold);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .project-card:hover::after { transform: scaleX(1); }
+    .project-num {
+      font-family: var(--serif); font-size: 3.5rem;
+      font-weight: 300; color: rgba(201,168,76,0.12);
+      line-height: 1; margin-bottom: 1rem;
+      position: absolute; top: 1.5rem; right: 1.5rem;
+    }
+    .project-tag {
+      font-size: 0.65rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .project-title {
+      font-family: var(--serif); font-size: 1.35rem;
+      font-weight: 600; color: var(--white); margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+    .project-desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.75; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--navy-mid); }
+    .contact-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 6rem; margin-top: 4rem; align-items: start; }
+    .contact-info { }
+    .contact-intro {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.15rem; color: var(--off-white);
+      line-height: 1.8; margin-bottom: 2.5rem;
+    }
+    .contact-detail {
+      display: flex; align-items: flex-start; gap: 1rem;
+      margin-bottom: 1.4rem;
+    }
+    .contact-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.2);
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 1px;
+    }
+    .contact-icon svg { width: 16px; height: 16px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+    .contact-detail-text { }
+    .contact-detail-label {
+      font-size: 0.68rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.2rem;
+    }
+    .contact-detail-value { font-size: 0.9rem; color: var(--white); }
+    .social-links { display: flex; gap: 1rem; margin-top: 2.5rem; }
+    .social-link {
+      width: 42px; height: 42px;
+      background: rgba(201,168,76,0.06);
+      border: 1px solid rgba(201,168,76,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold); text-decoration: none;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .social-link:hover { background: rgba(201,168,76,0.15); border-color: var(--gold); }
+    .social-link svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+
+    /* Form */
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); }
+    .form-input, .form-textarea {
+      background: rgba(10,22,40,0.6);
+      border: 1px solid rgba(201,168,76,0.15);
+      color: var(--white);
+      font-family: var(--sans); font-size: 0.88rem; font-weight: 300;
+      padding: 0.9rem 1.1rem;
+      outline: none;
+      transition: border-color 0.3s;
+      width: 100%;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: rgba(201,168,76,0.5); }
+    .form-input::placeholder, .form-textarea::placeholder { color: rgba(138,155,181,0.4); }
+    .form-textarea { resize: vertical; min-height: 140px; }
+    .form-btn {
+      align-self: flex-start;
+      padding: 1rem 2.8rem;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: var(--sans);
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      border: none; cursor: pointer;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+      transition: background 0.3s, transform 0.2s;
+    }
+    .form-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid rgba(201,168,76,0.12);
+      padding: 2.5rem 6vw;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-name {
+      font-family: var(--serif); font-size: 1.1rem;
+      font-weight: 600; color: var(--gold);
+    }
+    .footer-copy {
+      font-size: 0.73rem; color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scrollDrop {
+      0%   { opacity: 0; transform: scaleY(0); transform-origin: top; }
+      40%  { opacity: 1; transform: scaleY(1); transform-origin: top; }
+      80%  { opacity: 0; transform: scaleY(1); transform-origin: bottom; }
+      100% { opacity: 0; }
+    }
+
+    /* Reveal on scroll */
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1; transform: translateY(0);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      #hero { grid-template-columns: 1fr; padding-top: 8rem; gap: 3rem; }
+      .hero-visual { display: none; }
+      .hero-line { display: none; }
+      .about-grid, .edu-layout, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .skills-grid, .projects-grid { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+      .about-stats { max-width: 380px; }
+    }
+    @media (max-width: 560px) {
+      .skills-grid, .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">J. O. Gwaro</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#projects">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Legal Professional</div>
+    <h1>Joshua<br><em>Ondari</em><br>Gwaro</h1>
+    <div class="hero-title">Law Student &nbsp;|&nbsp; Aspiring Legal Professional</div>
+    <p class="hero-tagline">
+      "Committed to justice, integrity,<br>and the pursuit of legal excellence."
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Contact Me</a>
+      <a href="#about" class="btn-outline">View Profile</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="portrait-frame">
+      <div class="portrait-inner">
+        <div class="portrait-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <span style="font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Profile Photo</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">01 — About</div>
+  <h2>A Mind Built for the <em>Law</em></h2>
+
+  <div class="about-grid">
+    <div>
+      <div class="about-stats">
+        <div class="stat-box">
+          <div class="stat-number">Law</div>
+          <div class="stat-label">Degree</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">6</div>
+          <div class="stat-label">Core Skills</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">3+</div>
+          <div class="stat-label">Projects</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">∞</div>
+          <div class="stat-label">Ambition</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-text reveal">
+      <p>
+        Joshua Ondari Gwaro is a dedicated and driven law student whose passion for justice is matched only by his intellectual rigour and unwavering commitment to professional excellence.
+      </p>
+      <p>
+        With a foundation built on analytical precision, meticulous legal research, and a deep appreciation for the ethical dimensions of the law, Joshua approaches every area of study with the seriousness it demands. He understands that the law is not merely a vocation — it is a responsibility to society, to truth, and to the individuals whose lives depend on sound legal representation and advocacy.
+      </p>
+      <p>
+        Joshua brings strong communication skills to every forum, whether in written legal analysis or oral argumentation. His ability to dissect complex legal problems, synthesize case law, and construct compelling arguments positions him as a formidable emerging voice in the legal community. He is driven by a genuine desire to contribute meaningfully to the legal profession and to champion justice in all its forms.
+      </p>
+      <div class="about-qualities">
+        <span class="quality-tag">Analytical</span>
+        <span class="quality-tag">Diligent</span>
+        <span class="quality-tag">Principled</span>
+        <span class="quality-tag">Articulate</span>
+        <span class="quality-tag">Research-driven</span>
+        <span class="quality-tag">Integrity-first</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">02 — Skills</div>
+  <h2>Areas of <em>Competence</em></h2>
+
+  <div class="skills-grid">
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="skill-name">Legal Research & Writing</div>
+      <div class="skill-desc">Proficient in case law analysis, statutory interpretation, and crafting precise legal memoranda and briefs that are clear, well-reasoned, and persuasive.</div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
+      </div>
+      <div class="skill-name">Critical Thinking & Analysis</div>
+      <div class="skill-desc">Exceptional ability to evaluate evidence objectively, identify logical inconsistencies, and construct coherent arguments grounded in legal reasoning and sound judgment.</div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <div class="skill-name">Public Speaking & Argumentation</div>
+      <div class="skill-desc">Confident and composed oral advocate, skilled at presenting arguments before panels, engaging in structured debate, and responding to challenging questions with clarity.</div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      </div>
+      <div class="skill-name">Attention to Detail</div>
+      <div class="skill-desc">Meticulous approach to reviewing legal documents, identifying procedural nuances, and ensuring accuracy in every submission — because in law, every word matters.</div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="skill-name">Ethics & Professional Responsibility</div>
+      <div class="skill-desc">A strong commitment to the ethical foundations of legal practice, including confidentiality, integrity, candour to the court, and the duties owed to clients and the profession.</div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
+      <div class="skill-name">Case Study Analysis</div>
+      <div class="skill-desc">Experienced in applying legal doctrine to complex fact patterns, drawing on precedent and statutory authority to produce thorough, well-structured legal opinions.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">03 — Education</div>
+  <h2>Academic <em>Foundation</em></h2>
+
+  <div class="edu-layout">
+    <div class="edu-timeline reveal">
+      <div class="edu-entry">
+        <div class="edu-dot"></div>
+        <div class="edu-year">Current — Ongoing</div>
+        <div class="edu-degree">Bachelor of Laws (LLB)</div>
+        <div class="edu-institution">University — Kenya</div>
+        <div class="edu-desc">Pursuing an undergraduate law degree with dedication to academic excellence and an emphasis on developing the analytical and practical skills demanded by the modern legal profession.</div>
+      </div>
+      <div class="edu-entry">
+        <div class="edu-dot"></div>
+        <div class="edu-year">Coursework Highlights</div>
+        <div class="edu-degree">Core Legal Studies</div>
+        <div class="edu-institution">Jurisprudence · Constitutional Law · Criminal Law · Contract Law · Civil Procedure</div>
+        <div class="edu-desc">Engaged with a rigorous curriculum spanning both substantive and procedural law, developing a comprehensive understanding of the Kenyan legal system and international legal frameworks.</div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="edu-highlight">
+        <div class="edu-highlight-label">Academic Philosophy</div>
+        <div class="edu-highlight-text">
+          "The study of law is the study of civilisation itself — its conflicts, its conscience, and its continuous striving toward a more just world."
+        </div>
+      </div>
+      <ul class="edu-values">
+        <li>Consistent academic engagement and timely submission of research papers and legal assignments.</li>
+        <li>Active participation in seminars, lectures, and student-led legal discussion forums.</li>
+        <li>Pursuit of excellence beyond the syllabus through independent legal reading and current affairs analysis.</li>
+        <li>Development of a personal research methodology grounded in credible legal databases and primary sources.</li>
+        <li>Commitment to peer learning and collaborative academic growth within the law faculty community.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS / EXPERIENCE -->
+<section id="projects">
+  <div class="section-label">04 — Experience</div>
+  <h2>Projects & <em>Initiatives</em></h2>
+
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <div class="project-num">01</div>
+      <div class="project-tag">Research</div>
+      <div class="project-title">Legal Research Projects</div>
+      <div class="project-desc">Conducted in-depth research on a range of legal topics including constitutional rights, land law, and criminal procedure. Produced structured legal memoranda demonstrating the ability to locate, analyse, and apply primary and secondary legal sources to real-world scenarios.</div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-num">02</div>
+      <div class="project-tag">Advocacy</div>
+      <div class="project-title">Mock Trials & Moot Court</div>
+      <div class="project-desc">Participated in simulated courtroom proceedings, taking on roles as both advocate and respondent. Developed the ability to think quickly under pressure, structure legal arguments persuasively, and engage with judicial questioning in a composed and professional manner.</div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-num">03</div>
+      <div class="project-tag">Analysis</div>
+      <div class="project-title">Case Analysis Studies</div>
+      <div class="project-desc">Produced detailed analyses of landmark cases, examining the reasoning of the court, the evolution of legal principles, and the broader socio-legal implications of judicial decisions. This work honed the ability to extract meaning from complex judgments and apply doctrine to novel situations.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">05 — Contact</div>
+  <h2>Open to <em>Opportunities</em></h2>
+
+  <div class="contact-layout">
+    <div class="reveal">
+      <p class="contact-intro">
+        Whether you are seeking a diligent research assistant, a passionate intern, or simply wish to connect with an emerging legal professional, I welcome every conversation.
+      </p>
+
+      <div class="contact-detail">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="contact-detail-text">
+          <div class="contact-detail-label">Email</div>
+          <div class="contact-detail-value">joshuagwaro@email.com</div>
+        </div>
+      </div>
+
+      <div class="contact-detail">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div class="contact-detail-text">
+          <div class="contact-detail-label">Phone</div>
+          <div class="contact-detail-value">+254 700 000 000</div>
+        </div>
+      </div>
+
+      <div class="contact-detail">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="contact-detail-text">
+          <div class="contact-detail-label">Location</div>
+          <div class="contact-detail-value">Nairobi, Kenya</div>
+        </div>
+      </div>
+
+      <div class="social-links">
+        <a href="#" class="social-link" title="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="#" class="social-link" title="Twitter / X">
+          <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+        </a>
+        <a href="#" class="social-link" title="ResearchGate / Academia">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-input" placeholder="Your first name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-input" placeholder="Your last name" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-input" placeholder="your@email.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Subject</label>
+          <input type="text" class="form-input" placeholder="Purpose of your message" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Write your message here…"></textarea>
+        </div>
+        <button type="submit" class="form-btn">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Joshua Ondari Gwaro</div>
+  <div class="footer-copy">© 2026 Joshua Ondari Gwaro. All rights reserved.</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // Stagger reveal children in skills/projects grids
+  document.querySelectorAll('.skills-grid .skill-card, .projects-grid .project-card').forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 3) * 0.12}s`;
+  });
+
+  // Form submit
+  function handleSubmit(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const btn = form.querySelector('.form-btn');
+
+  const data = {
+    first_name: form.querySelectorAll('.form-input')[0].value,
+    last_name: form.querySelectorAll('.form-input')[1].value,
+    email: form.querySelectorAll('.form-input')[2].value,
+    subject: form.querySelectorAll('.form-input')[3].value,
+    message: form.querySelector('.form-textarea').value
+  };
+
+  btn.textContent = "Sending...";
+
+  fetch("http://localhost:5000/send-message", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      btn.textContent = "Message Sent ✓";
+      btn.style.background = "#2a7a4b";
+      form.reset();
+    } else {
+      throw new Error();
+    }
+  })
+  .catch(() => {
+    btn.textContent = "Failed ❌";
+    btn.style.background = "#a83232";
+  });
+
+  setTimeout(() => {
+    btn.textContent = "Send Message";
+    btn.style.background = "";
+  }, 3000);
+}
+
+  // Nav active state on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current
+        ? 'var(--gold)' : '';
+    });
+  });
+</script>
+</body>
+</html>
