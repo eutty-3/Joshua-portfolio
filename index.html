@@ -893,8 +893,21 @@
     subject: form.querySelectorAll('.form-input')[3].value,
     message: form.querySelector('.form-textarea').value
   };
+/* ✅ VALIDATION SAFETY (ADD HERE) */
+if (
+  !data.first_name ||
+  !data.last_name ||
+  !data.email ||
+  !data.subject ||
+  !data.message
+) {
+  alert("⚠️ Please fill in all fields");
+  btn.textContent = "Send Message";
+  return;
+}
 
-  btn.textContent = "Sending...";
+/* continue only if valid */
+btn.textContent = "Sending...";
 
   fetch("https://joshua-portfolio-ed1d.onrender.com/api/contact", {
   method: "POST",
